@@ -1,6 +1,5 @@
 require 'pronto'
 require 'shellwords'
-require 'pry'
 
 module Pronto
   class Docslint < Runner
