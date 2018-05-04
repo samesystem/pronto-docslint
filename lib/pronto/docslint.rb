@@ -28,7 +28,7 @@ module Pronto
     def meaningful_patches
       @patches.select do |patch|
         modified = patch.additions > additions_treshold || patch.deletions > deletions_treshold
-        modified && patch.delta.new_file[:path].match?(/^app\/.*\.(#{watched_file_extensions.join('')})$/)
+        modified && patch.delta.new_file[:path].match?(/^app\/.*\.(#{watched_file_extensions.join('|')})$/)
       end
     end
 
