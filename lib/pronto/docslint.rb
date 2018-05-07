@@ -22,7 +22,7 @@ module Pronto
     end
 
     def documentation_exists?
-      @patches.any? { |patch| patch.delta.new_file[:path].match?(/\.md$/) }
+      @patches.any? { |patch| patch.delta.new_file[:path].match?(/^\.md$/) }
     end
 
     def meaningful_patches
