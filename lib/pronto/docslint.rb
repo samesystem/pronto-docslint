@@ -34,7 +34,7 @@ module Pronto
 
     def new_message(patch)
       path = patch.delta.new_file[:path]
-      watched_extensions = watched_file_extensions.map { |ext| "\e[33m#{ext}\e[0m" }.join(',')
+      watched_extensions = watched_file_extensions.map { |ext| "`{ext}`" }.join(',')
       offence = "Changes on #{watched_extensions} files requires documentation changes.."
 
       Message.new(path, OpenStruct.new, :warning, offence, nil, self.class)
