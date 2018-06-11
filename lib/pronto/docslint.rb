@@ -36,8 +36,8 @@ module Pronto
       path = patch.delta.new_file[:path]
       watched_extensions = watched_file_extensions.map { |ext| "`#{ext}`" }.join(',')
       offence = "Changes on #{watched_extensions} files requires documentation changes.."
-
-      Message.new(path, OpenStruct.new(patch: patch), :warning, offence, nil, self.class)
+      line = patch.added_lines.first || patch.deleted_lines.first
+      Message.new(path, line, :warning, offence, nil, self.class)
     end
 
     def prepare_config
