@@ -26,10 +26,11 @@ module Pronto
     end
 
     def meaningful_patches
-      @patches.select do |patch|
-        modified = patch.additions > additions_treshold || patch.deletions > deletions_treshold
-        modified && patch.delta.new_file[:path].match?(/^app\/.*\.(#{watched_file_extensions.join('|')})$/)
-      end
+      extentions = /^app\/.*\.(#{watched_file_extensions.join('|')})$/
+      @patches
+        .select { |patch| !patch.delta.deleted? }
+        .select { |patch| patch.additions > additions_treshold || patch.deletions > deletions_treshold }
+        .select { |patch| patch.delta.new_file[:path].match?(extentions) }
     end
 
     def new_message(patch)
